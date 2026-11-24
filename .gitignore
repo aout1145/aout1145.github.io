@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+.pnpm-store/
+.npm-cache/
+.cache/
+.tmp/
+.DS_Store

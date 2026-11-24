@@ -1,0 +1,20 @@
+{
+  "name": "aout-homepage",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "a_out 的个人主页与博客，Astro 静态站点",
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev --port 8123",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build && node tools/fixup.mjs",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --port 8123",
+    "check": "node tools/check.mjs",
+    "ci": "astro build && node tools/check.mjs",
+    "new": "node tools/new-post.mjs"
+  },
+  "devDependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.6",
+    "astro": "^7.4.13"
+  }
+}

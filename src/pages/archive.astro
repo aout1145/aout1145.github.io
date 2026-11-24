@@ -1,0 +1,35 @@
+---
+import Base from "../layouts/Base.astro";
+import { getCollection } from "astro:content";
+import { postPath, formatDate, sortPosts } from "../lib/posts";
+
+const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(sortPosts);
+
+const byYear = new Map<number, typeof posts>();
+for (const post of posts) {
+  const year = post.data.date.getUTCFullYear();
+  if (!byYear.has(year)) byYear.set(year, []);
+  byYear.get(year)!.push(post);
+}
+const years = [...byYear.entries()];
+---
+
+<Base title="归档">
+  <h2>归档</h2>
+
+  {posts.length === 0 && <p>还没有文章。</p>}
+
+  {years.map(([year, items]) => (
+    <Fragment>
+      <h3>{year}</h3>
+      <table CLASS="posts">
+        {items.map((post) => (
+          <tr>
+            <td><a HREF={postPath(post)}>{post.data.title}</a></td>
+            <td>{formatDate(post.data.date)}</td>
+          </tr>
+        ))}
+      </table>
+    </Fragment>
+  ))}
+</Base>

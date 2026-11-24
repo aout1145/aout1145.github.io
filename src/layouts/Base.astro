@@ -1,0 +1,45 @@
+---
+import { site } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const pageTitle = title ? `${title} · ${site.title}` : site.title;
+const desc = description ?? site.description;
+const year = new Date().getFullYear();
+
+const path = Astro.url.pathname.replace(/index\.html$/, "").replace(/\.html$/, "");
+const isActive = (url: string) => url.replace(/\.html$/, "") === path;
+---
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html LANG="zh-CN">
+<head>
+<title>{pageTitle}</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<meta NAME="viewport" CONTENT="width=device-width, initial-scale=1">
+<meta NAME="description" CONTENT={desc}>
+<link REL="stylesheet" TYPE="text/css" HREF="/site.css">
+<link REL="alternate" TYPE="application/rss+xml" TITLE={`${site.title} RSS`} HREF="/feed.xml">
+</head>
+<body BGCOLOR="#FFFFFF" TEXT="#1F2328" LINK="#0969DA" VLINK="#8250DF">
+
+<div CLASS="site-head">
+  <h1><a HREF="/">{site.title}</a></h1>
+</div>
+
+<p CLASS="nav">{site.nav.map((item, i) => (
+  <Fragment>{i > 0 && <Fragment> </Fragment>}<a HREF={item.url} CLASS={isActive(item.url) ? "active" : ""}>{item.label}</a></Fragment>
+))}</p>
+
+<slot />
+
+<div CLASS="foot">
+  <p>{site.startYear === year ? `© ${year}` : `© ${site.startYear}–${year}`} {site.author} · <a HREF={site.github}>GitHub</a> · <a HREF="/about.html">关于</a> · <a HREF="/feed.xml">RSS</a>{site.email && <Fragment> · <a HREF={`mailto:${site.email}`}>{site.email}</a></Fragment>}</p>
+</div>
+
+</body>
+</html>

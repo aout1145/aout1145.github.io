@@ -1,0 +1,26 @@
+---
+import Base from "../layouts/Base.astro";
+import { getCollection } from "astro:content";
+import { postPath, formatDate, sortPosts } from "../lib/posts";
+
+const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(sortPosts);
+const recent = posts.slice(0, 8);
+---
+
+<Base title="首页">
+  <h2>文章</h2>
+
+  {recent.length === 0 && <p>还没有文章。</p>}
+
+  {recent.length > 0 && (
+    <table CLASS="posts">
+      {recent.map((post) => (
+        <tr>
+          <td><a HREF={postPath(post)}>{post.data.title}</a></td>
+          <td>{formatDate(post.data.date)}</td>
+        </tr>
+      ))}
+    </table>
+  )}
+
+</Base>
