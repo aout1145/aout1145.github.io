@@ -32,7 +32,7 @@ const isActive = (url: string) => url.replace(/\.html$/, "") === path;
 </div>
 
 <p CLASS="nav">{site.nav.map((item, i) => (
-  <Fragment>{i > 0 && <Fragment> </Fragment>}<a HREF={item.url} CLASS={isActive(item.url) ? "active" : ""}>{item.label}</a></Fragment>
+  <Fragment>{i > 0 && <Fragment> </Fragment>}<a HREF={item.url} CLASS={isActive(item.url) ? "active" : undefined}>{item.label}</a></Fragment>
 ))}</p>
 
 <slot />
