@@ -36,10 +36,10 @@ draft: true   # 加了就不发布（可选）
 ```
 astro.config.mjs        # 站点配置（静态导出、.html 结尾的 URL、sitemap）
 src/layouts/Base.astro  # 页面骨架（head、标题、导航、页脚）
-src/pages/              # 首页、归档、关于、链接、404、feed.xml
+src/pages/              # 首页、归档、关于、404、feed.xml
 src/content/posts/      # 文章 Markdown
 src/lib/posts.ts        # URL 与日期工具
-src/data/site.ts        # 站点标题、导航、链接
+src/data/site.ts        # 站点标题、导航、外部链接
 public/                 # 原样复制到产物根目录：site.css、CNAME、robots.txt
 tools/check.mjs         # 产物检查
 tools/fixup.mjs         # 把 DOCTYPE 改回 HTML 3.2

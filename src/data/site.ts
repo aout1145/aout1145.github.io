@@ -9,7 +9,6 @@ export const site = {
   nav: [
     { label: "首页", url: "/" },
     { label: "归档", url: "/archive.html" },
-    { label: "链接", url: "/links.html" },
   ],
 };
 

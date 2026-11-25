@@ -9,7 +9,7 @@
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build && node tools/fixup.mjs",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --port 8123",
     "check": "node tools/check.mjs",
-    "ci": "astro build && node tools/check.mjs",
+    "ci": "npm run build && npm run check",
     "new": "node tools/new-post.mjs"
   },
   "devDependencies": {
